@@ -1,2 +1,0 @@
-# W_INFO
-information
