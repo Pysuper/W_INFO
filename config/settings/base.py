@@ -32,6 +32,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # 将三个APP相加
 DJANGO_APPS = [
+    # "simpleui",  # 配置后台站点
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -47,10 +48,12 @@ THIRD_PARTY_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    "allauth.socialaccount.providers.weixin",   # 配置微信登录
     "django_celery_beat",
-    "rest_framework",
-    "rest_framework.authtoken",
+    # "rest_framework",
+    # "rest_framework.authtoken",
     "corsheaders",
+    "sorl.thumbnail",
 ]
 LOCAL_APPS = [
     "wow.users.apps.UsersConfig",
