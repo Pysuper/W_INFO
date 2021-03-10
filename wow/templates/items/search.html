@@ -5,41 +5,43 @@
     ItemSearch
 {% endblock %}
 
-{% block javascript %}
-    <link href="{% static 'wow/bootstrap.min.css' %}" rel="stylesheet"/>
-    <link href="{% static 'magicalcoder.css' %}" rel="stylesheet"/>
-    <script src="{% static 'json3.min.js' %}"></script>
-    <script src="{% static 'echarts.min.js' %}"></script>
-    <script src="{% static 'dataTool.min.js' %}"></script>
-    <script src="{% static 'popper.min.js' %}"></script>
-    <script src="{% static 'bootstrap.min.js' %}"></script>
-    <script src="{% static 'common.js' %}"></script>
-    <script src="{% static 'magicalcoder.js' %}"></script>
+{% block css %}
+
 {% endblock %}
 
 {% block content %}
-    <div id="magicalDragScene" class="mc-root mc-ui-absolute-pane">
-        <div class="input-group" style="position: absolute; left: 27.5437%; top: 10.745%;">
-            <input class="form-control" type="text" aria-label="Text input with segmented dropdown button"
-                   placeholder="请输入关键词"/>
-            <div class="input-group-append">
-                <button class="btn btn-outline-primary" type="button">更多搜索</button>
-                <button class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" type="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="sr-only">下拉</span>
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">链接1</a>
-                    <a class="dropdown-item" href="#">链接2</a>
-                    <a class="dropdown-item" href="#">链接3</a>
-                </div>
-            </div>
-
+    <div class="htmleaf-container">
+        <div class="search d1">
+            <input id="search" type="text" placeholder="搜索从这里开始...">
+            <button id="submit" type="submit">submit</button>
         </div>
     </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
 
     <script>
-        new McECharts().render();
+        $('#submit').click(function () {
+            var key = $("#search").val()
+            $.ajax({
+                url: '/items/all/',
+                type: 'post',
+                dataType: 'json',
+                contentType: "application/json",
+                async: true,//异步请求
+                cache: false,
+                data: JSON.stringify({"key":key}),//使用变量sendData
+                //执行成功的回调函数
+                success: function (data) {
+                    alert(data.data)
+                },
+                //执行失败或错误的回调函数
+                error: function (data) {
+                    alert("error");
+                }
+            });
+        });
     </script>
 {% endblock %}
 

@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Items(models.Model):
-    id = models.IntegerField(unique=True, verbose_name="ID")
+    id = models.IntegerField(primary_key=True, unique=True, verbose_name="ID")
     name = models.CharField(max_length=50, null=True, blank=True, verbose_name="名称")
     grade = models.CharField(max_length=50, null=True, blank=True, verbose_name="等级")
     icon = models.CharField(max_length=50, null=True, blank=True, verbose_name="图标")

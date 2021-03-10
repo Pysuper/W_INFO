@@ -1,12 +1,15 @@
-from django.contrib.auth.mixins import LoginRequiredMixin  # 被类继承 的登录装饰器
-from django.views.generic import ListView  # 通用类视图
-
+from django.http import JsonResponse
+from django.shortcuts import render
+import json
 from item.models import Items
 
 
-class ItemsListView(LoginRequiredMixin, ListView):
-    """所有物品"""
-    model = Items
-    paginate_by = 10
-    context_object_name = "items"
-    template_name = "items/list.html"
+def search(request):
+    if request.method == "GET":
+        return render(request, "items/search.html")
+    key = json.loads(request.body)["key"]
+    if key:
+        item = Items.objects.get(name=key)
+        if item:
+            return JsonResponse({"data": item.table})
+    return JsonResponse({"status": False})

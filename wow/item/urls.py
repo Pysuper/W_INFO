@@ -12,5 +12,5 @@ from wow.item import views
 app_name = "item"
 
 urlpatterns = [
-    path("all/", views.ItemsListView.as_view(), name="items"),
+    path("all/", views.search, name="items"),
 ]
